@@ -2,6 +2,7 @@ node_modules/
 /test-results/
 /playwright-report/
 /blob-report/
+/flakiness-report/
 /playwright/.cache/
 *allure_results
 *allure-results
