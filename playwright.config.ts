@@ -1,6 +1,6 @@
-import { defineConfig } from "@playwright/test";
-import { AUTOMATION_USER_AGENT } from "@src/utilities/constants";
-import { config as dotenvConfig } from "dotenv";
+import {defineConfig} from "@playwright/test";
+import {AUTOMATION_USER_AGENT} from "@src/utilities/constants";
+import {config as dotenvConfig} from "dotenv";
 
 dotenvConfig({ quiet: true });
 
@@ -45,21 +45,23 @@ export default defineConfig({
 			},
 		},
 	],
-	reporter: process.env.CI
-		? [
-				[
-					"allure-playwright",
-					{
-						links: {
-							issue: { urlTemplate: "https://%s" },
-							link: { urlTemplate: "https://%s" },
-							tms: { urlTemplate: "https://%s" },
-						},
-					},
-				],
-				["junit", { outputFile: "test-results/results.xml" }],
-			]
-		: [],
+	reporter: [
+		[
+			"@flakiness/playwright",
+			{ flakinessProject: "nirtal85/Playwright-Typescript-Example" },
+		],
+		[
+			"allure-playwright",
+			{
+				links: {
+					issue: { urlTemplate: "https://%s" },
+					link: { urlTemplate: "https://%s" },
+					tms: { urlTemplate: "https://%s" },
+				},
+			},
+		],
+		["junit", { outputFile: "test-results/results.xml" }],
+	],
 	retries: process.env.CI ? 2 : 0,
 	testDir: "./tests",
 	timeout: 15 * 60 * 1000,
