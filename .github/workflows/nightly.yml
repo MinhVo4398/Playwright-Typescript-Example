@@ -38,7 +38,7 @@ jobs:
     timeout-minutes: 15
     runs-on: ubuntu-latest
     container:
-      image: mcr.microsoft.com/playwright:v1.58.1
+      image: mcr.microsoft.com/playwright:v1.59.1
     env:
       BASE_URL: ${{ vars.BASE_URL }}
     strategy:
@@ -48,7 +48,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
       - name: Install pnpm
-        uses: pnpm/action-setup@v4
+        uses: pnpm/action-setup@v5
         with:
           run_install: false
       - name: Install Node.js
@@ -65,7 +65,7 @@ jobs:
           --shard=${{ matrix.group }}/${{ github.event.inputs.parallelism || 2 }}
       - name: Upload shard allure-results
         if: always()
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: allure-results-${{ matrix.group }}
           path: allure-results
@@ -79,7 +79,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
       - name: Install pnpm
-        uses: pnpm/action-setup@v4
+        uses: pnpm/action-setup@v5
         with:
           run_install: false
       - name: Install Node.js
@@ -91,7 +91,7 @@ jobs:
         run: pnpm install --frozen-lockfile
       - name: Download all shard results
         if: always()
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           pattern: allure-results-*
           path: allure-results
@@ -132,4 +132,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
