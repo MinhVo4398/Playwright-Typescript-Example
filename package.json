@@ -5,6 +5,7 @@
 		"@aws-sdk/client-s3": "3.980.0",
 		"@aws-sdk/credential-provider-ini": "3.972.3",
 		"@biomejs/biome": "2.3.13",
+		"@flakiness/playwright": "1.6.0",
 		"@playwright/test": "1.58.1",
 		"@types/node": "24.10.9",
 		"@types/ssh2-sftp-client": "^9.0.4",
